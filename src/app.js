@@ -37,6 +37,17 @@ search.addWidget(
 );
 
 search.addWidget(
+  instantsearch.widgets.refinementList({
+    container: '#categories',
+    attributeName: "categories",
+    autoHideContainer: false,
+    templates: {
+      header: "Categories"
+    }
+  })
+)
+
+search.addWidget(
   instantsearch.widgets.stats({
     container: '#stats',
     templates: {
