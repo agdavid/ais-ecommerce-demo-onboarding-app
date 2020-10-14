@@ -45,7 +45,7 @@ search.addWidget(
       header: "Categories"
     }
   })
-)
+);
 
 search.addWidget(
   instantsearch.widgets.stats({
@@ -68,6 +68,17 @@ search.addWidget(
     autoHideContainer: false, 
     templates: {
       header: "Brands"
+    }
+  })
+)
+
+search.addWidget(
+  instantsearch.widgets.rangeSlider({
+    container:"#price",
+    autoHideContainer: false,
+    attributeName: 'price',
+    templates: {
+      header: "Price"
     }
   })
 )
