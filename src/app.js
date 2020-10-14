@@ -1,4 +1,5 @@
-/* global algoliasearch instantsearch */
+import algoliasearch from 'algoliasearch';
+import { hitTemplate } from './helpers.js';
 
 const searchClient = algoliasearch(
   'APP_ID',
@@ -8,18 +9,23 @@ const searchClient = algoliasearch(
 const search = instantsearch({
   indexName: 'demo_ecommerce',
   searchClient,
+  searchParameters: {
+    hitsPerPage: 5,
+    attributesToSnippet: ["description:24"],
+    snippetEllipsisText:"[..."
+  }
 });
 
-search.addWidgets([
-  instantsearch.widgets.searchBox({
-    container: '#searchbox',
-  }),
+search.addWidget(
   instantsearch.widgets.hits({
-    container: '#hits',
-  }),
-  instantsearch.widgets.pagination({
-    container: '#pagination',
-  }),
-]);
+    container: "#hits",
+    templates: {
+      empty: "No results.",
+      item: function(hit) {
+        return hitTemplate(hit);
+      }
+    }
+  })
+);
 
 search.start();
