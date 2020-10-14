@@ -60,4 +60,16 @@ search.addWidget(
   })
 )
 
+search.addWidget(
+  instantsearch.widgets.refinementList({
+    container: "#brands",
+    attributeName: "brand",
+    searchForFacetValues: true,
+    autoHideContainer: false, 
+    templates: {
+      header: "Brands"
+    }
+  })
+)
+
 search.start();
