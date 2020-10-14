@@ -2,8 +2,8 @@ import algoliasearch from 'algoliasearch';
 import { hitTemplate } from './helpers.js';
 
 const searchClient = algoliasearch(
-  'APP_ID',
-  'SEARCH_API_KEY'
+  '0HCA6HLFLT',
+  '3a56d2de5dc47337f5c7210913ceeb83'
 );
 
 const search = instantsearch({
@@ -35,5 +35,18 @@ search.addWidget(
     autofocus: false
   })
 );
+
+search.addWidget(
+  instantsearch.widgets.stats({
+    container: '#stats',
+    templates: {
+      body(hit) {
+        return `<span role="img" aria-label="emoji">⚡️</span> <strong>${hit.nbHits}</strong> results found ${
+          hit.query != "" ? `for <strong>"${hit.query}"</strong>` : ``
+        } in <strong>${hit.processingTimeMS}ms</strong>`;
+      }
+    }
+  })
+)
 
 search.start();
