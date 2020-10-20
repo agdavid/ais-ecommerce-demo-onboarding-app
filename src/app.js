@@ -16,7 +16,12 @@ const search = instantsearch({
   }
 });
 
-search.addWidget(
+search.addWidgets([
+  instantsearch.widgets.searchBox({
+    container:"#searchbox",
+    placeholder: "Search for products",
+    autofocus: false
+  }),
   instantsearch.widgets.hits({
     container: "#hits",
     templates: {
@@ -25,18 +30,7 @@ search.addWidget(
         return hitTemplate(hit);
       }
     }
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.searchBox({
-    container:"#searchbox",
-    placeholder: "Search for products",
-    autofocus: false
-  })
-);
-
-search.addWidget(
+  }),
   instantsearch.widgets.refinementList({
     container: '#categories',
     attributeName: "categories",
@@ -44,10 +38,7 @@ search.addWidget(
     templates: {
       header: "Categories"
     }
-  })
-);
-
-search.addWidget(
+  }),
   instantsearch.widgets.stats({
     container: '#stats',
     templates: {
@@ -57,10 +48,7 @@ search.addWidget(
         } in <strong>${hit.processingTimeMS}ms</strong>`;
       }
     }
-  })
-)
-
-search.addWidget(
+  }),
   instantsearch.widgets.refinementList({
     container: "#brands",
     attributeName: "brand",
@@ -69,10 +57,7 @@ search.addWidget(
     templates: {
       header: "Brands"
     }
-  })
-)
-
-search.addWidget(
+  }),
   instantsearch.widgets.rangeSlider({
     container:"#price",
     autoHideContainer: false,
@@ -80,13 +65,10 @@ search.addWidget(
     templates: {
       header: "Price"
     }
-  })
-)
-
-search.addWidget(
+  }),
   instantsearch.widgets.pagination({
     container: '#pagination'
   })
-)
+])
 
 search.start();
