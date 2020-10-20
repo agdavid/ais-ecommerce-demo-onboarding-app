@@ -383,6 +383,21 @@ footer {
   color: #999;
 }
 
+.carousel-single {
+  position: relative;
+  color: black;
+  background: #fff;
+}
+.carousels__list-container {
+  display: flex;
+  overflow-x: auto;
+  list-style: none;
+  padding-left: 0;
+  position: relative;
+  scroll-behavior: smooth;
+  margin-left: -16px;
+}
+
 /* Placeholders */
 
 #searchbox:empty:before,

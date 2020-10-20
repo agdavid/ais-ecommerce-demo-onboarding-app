@@ -1,5 +1,5 @@
 import algoliasearch from 'algoliasearch';
-import { hitTemplate } from './helpers.js';
+import { carouselHitTemplate, hitTemplate } from './helpers.js';
 
 const searchClient = algoliasearch(
   '0HCA6HLFLT',
@@ -12,9 +12,34 @@ const search = instantsearch({
   searchParameters: {
     hitsPerPage: 5,
     attributesToSnippet: ["description:24"],
-    snippetEllipsisText:"[..."
+    snippetEllipsisText:"..."
   }
 });
+
+const carouselSearch = instantsearch({
+  indexName: 'demo_ecommerce_price_asc',
+  searchClient,
+  searchParameters: {
+    hitsPerPage: 5,
+  } 
+})
+
+// use hits connector
+// create render function which always has two parameters
+// renderOptions includes:
+  // widgetParams - all parameters such as container, template, etc.
+  // hits - query items
+  // results - metadata
+// isFirstRender - not always needed
+const renderCarousel = (renderOptions, isFirstRender) => {
+  const { widgetParams, hits } = renderOptions; 
+
+  widgetParams.container.innerHTML = hits.map((hit) => {
+    return carouselHitTemplate(hit);
+  }).join('');
+}
+
+const carousel = instantsearch.connectors.connectHits(renderCarousel);
 
 search.addWidgets([
   instantsearch.widgets.searchBox({
@@ -71,4 +96,11 @@ search.addWidgets([
   })
 ])
 
+carouselSearch.addWidgets([
+  carousel({
+    container: document.querySelector('ul#low-price'),
+  })
+])
+
 search.start();
+carouselSearch.start();

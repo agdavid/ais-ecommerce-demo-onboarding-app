@@ -6,7 +6,7 @@ export function hitTemplate(hit) {
         </div>
         <div class="hit-content">
             <div>
-                <div class-"hit-name">${hit._highlightResult.name.value}</div>
+                <div class="hit-name">${hit._highlightResult.name.value}</div>
                 <div class="hit-description">
                     ${hit._snippetResult.description.value}
                 </div>
@@ -15,4 +15,20 @@ export function hitTemplate(hit) {
         </div>
     </div>
     `;
+}
+
+export function carouselHitTemplate(hit) {
+    return `
+    <li>
+    <div class="hit">
+      <div class="hit-image">
+        <img src="${hit.image}">
+      </div>
+      <div class="hit-content">
+        <div class="hit-name">${hit.name}</div>
+        <div class="hit-price">$${hit.price}</div>    
+      <div>
+    </div>
+  </li>
+  `;
 }
